@@ -1,9 +1,3 @@
-// model.js
-// El modelo de predictibilidad. Guarda únicamente las transacciones que el
-// usuario aprueba (swipe izquierda) y, con cada dato nuevo, recalcula el
-// colchón recomendado. En vez de mostrar una "certeza" aparte, el número
-// mismo se ajusta y mostramos cuánto se movió respecto al cálculo anterior.
-
 const PredictModel = (function () {
   let savedData = [];
   let previousPrediction = null;
@@ -16,13 +10,13 @@ const PredictModel = (function () {
   const adjustValEl = document.getElementById("adjustVal");
 
   function computeRecommendedBuffer() {
-    const workData = savedData.filter(function (t) { return t.category === "trabajo"; });
     const n = savedData.length;
-    const avgWork = workData.length
-      ? workData.reduce(function (s, t) { return s + t.amount; }, 0) / workData.length
-      : savedData.reduce(function (s, t) { return s + t.amount; }, 0) / n;
+    // Cambiado: Ahora saca el promedio de TODOS los gastos guardados (ya no hay filtros de categoría)
+    const avgGeneral = n > 0 
+      ? savedData.reduce(function (s, t) { return s + t.amount; }, 0) / n 
+      : 0;
 
-    const weeklyPrediction = avgWork * 5;
+    const weeklyPrediction = avgGeneral * 5;
     const recommendedBuffer = weeklyPrediction * 3;
     return { weeklyPrediction: weeklyPrediction, recommendedBuffer: recommendedBuffer };
   }
@@ -55,7 +49,7 @@ const PredictModel = (function () {
 
     if (n === 0) {
       predictionEl.textContent = "—";
-      subEl.textContent = "Colchón recomendado para gastos de trabajo, según tu historial.";
+      subEl.textContent = "Colchón recomendado para tus gastos, según tu historial."; // Texto ajustado
       emptyMsgEl.style.display = "block";
       adjustRowEl.className = "adjust-row flat";
       adjustArrowEl.textContent = "";
@@ -69,18 +63,18 @@ const PredictModel = (function () {
 
     predictionEl.textContent = formatMoney(result.recommendedBuffer);
     predictionEl.classList.remove("settling");
-    void predictionEl.offsetWidth; // reinicia la animación
+    void predictionEl.offsetWidth; 
     predictionEl.classList.add("settling");
 
+    // Cambiado: Texto ajustado para no mencionar "trabajo"
     subEl.textContent =
       "Colchón sugerido (~3 semanas), calculado con " + n + " dato" + (n === 1 ? "" : "s") +
-      " de gasto de trabajo. Predicción semanal: " + formatMoney(result.weeklyPrediction) + ".";
+      " de gasto. Predicción semanal: " + formatMoney(result.weeklyPrediction) + ".";
 
     renderAdjustment(result.recommendedBuffer);
     previousPrediction = result.recommendedBuffer;
   }
 
-  // Único punto de entrada: se le pasa una transacción ya aprobada por el usuario.
   function addDataPoint(tx) {
     savedData.push(tx);
     recalc();

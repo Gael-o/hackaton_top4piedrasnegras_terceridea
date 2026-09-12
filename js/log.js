@@ -1,8 +1,3 @@
-// log.js
-// Historial visible de decisiones: cada vez que el usuario acepta o
-// descarta una transacción, queda registrada aquí. No decide nada,
-// solo lleva la bitácora — refuerza la idea de "cero caja negra".
-
 const ActivityLog = (function () {
   const listEl = document.getElementById("logList");
 
@@ -17,7 +12,7 @@ const ActivityLog = (function () {
         '<span class="log-tag ' + (included ? "included" : "excluded") + '">' +
           (included ? "GUARDADO" : "DESCARTADO") +
         "</span>" +
-        "<span>" + tx.merchant + "</span>" +
+        "<span>Gasto detectado</span>" + // Cambiado: Quitamos tx.merchant
       "</div>" +
       "<span>" + formatMoney(tx.amount) + "</span>";
     listEl.insertBefore(row, listEl.firstChild);
