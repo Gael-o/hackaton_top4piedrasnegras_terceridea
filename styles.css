@@ -163,6 +163,94 @@ body{
   line-height:1.5;
 }
 
+/* credit bridge card */
+.card.credit{
+  min-height:0;
+  gap:2px;
+  transition:background .5s ease;
+}
+.card.credit.locked{
+  background:linear-gradient(160deg, #33322C 0%, #201F1A 100%);
+}
+.card.credit.unlocked{
+  background:linear-gradient(160deg, #E3B355 0%, #B9812A 100%);
+  color:#241A08;
+}
+.card.credit.unlocked .card-label,
+.card.credit.unlocked .credit-sub{
+  opacity:0.75;
+}
+
+.credit-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.credit-status{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.03em;
+  text-transform:uppercase;
+  padding:4px 10px;
+  border-radius:99px;
+  background:rgba(255,255,255,0.12);
+}
+.card.credit.unlocked .credit-status{
+  background:rgba(36,26,8,0.14);
+}
+
+.credit-headline{
+  font-size:13px;
+  opacity:0.8;
+  margin:10px 0 14px;
+  line-height:1.5;
+  max-width:520px;
+}
+
+.credit-progress-track{
+  height:6px;
+  border-radius:4px;
+  background:rgba(255,255,255,0.16);
+  overflow:hidden;
+}
+.card.credit.unlocked .credit-progress-track{
+  background:rgba(36,26,8,0.14);
+}
+.credit-progress-fill{
+  height:100%;
+  background:#fff;
+  border-radius:4px;
+  transition:width .5s cubic-bezier(.4,0,.2,1);
+}
+.card.credit.unlocked .credit-progress-fill{
+  background:#241A08;
+}
+
+.credit-progress-label{
+  font-size:12px;
+  opacity:0.65;
+  margin:8px 0 0;
+}
+
+.credit-unlocked{
+  margin-top:16px;
+  padding-top:14px;
+  border-top:1px dashed rgba(0,0,0,0.15);
+}
+.credit-amount{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:30px;
+  font-weight:700;
+  margin:0;
+}
+.credit-sub{
+  font-size:12px;
+  margin:4px 0 0;
+  line-height:1.4;
+}
+
 /* notification zone */
 .stage{
   margin-top:24px;

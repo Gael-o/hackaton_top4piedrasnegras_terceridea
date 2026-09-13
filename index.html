@@ -47,6 +47,21 @@
     </div>
   </div>
 
+  <div class="card credit locked" id="creditCard">
+    <div class="credit-top">
+      <p class="card-label">Puente de crédito &middot; Capital One</p>
+      <span class="credit-status" id="creditStatus">Bloqueado</span>
+    </div>
+    <p class="credit-headline" id="creditHeadline">Mantén tu colchón de trabajo sobre la meta por 3 ajustes seguidos para desbloquear una línea de crédito simulada.</p>
+    <div class="credit-progress-track"><div class="credit-progress-fill" id="creditProgressFill" style="width:0%"></div></div>
+    <p class="credit-progress-label" id="creditProgressLabel">0 / 3 ajustes con colchón sobre la meta ($4,000)</p>
+
+    <div class="credit-unlocked" id="creditUnlocked" style="display:none;">
+      <p class="credit-amount" id="creditAmount">$0</p>
+      <p class="credit-sub">Línea de crédito pre-aprobada, simulada vía Nessie, según tu colchón sostenido.</p>
+    </div>
+  </div>
+
   <div class="stage">
     <div class="stage-area" id="stageArea">
       <p class="placeholder-text" id="placeholderText">Presiona "Notificación" para simular una nueva transacción de tu cuenta.</p>
@@ -72,6 +87,7 @@
 <script src="js/bank.js"></script>
 <script src="js/model.js"></script>
 <script src="js/log.js"></script>
+<script src="js/creditBridge.js"></script>
 <script src="js/interaction.js"></script>
 <script src="js/app.js"></script>
 </body>
